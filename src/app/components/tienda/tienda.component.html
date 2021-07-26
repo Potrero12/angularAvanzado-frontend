@@ -1,0 +1,48 @@
+<h4>Utilizar jquery dentro de angular</h4>
+<button id="botonJq">Mostrar Texto  </button>
+<p id="textoJq" class="alert alert-warning">
+    Phasellus malesuada purus sed quam tristique pulvinar. Phasellus egestas vehicula lacus sit amet aliquet. 
+    In eu mauris at nibh vehicula eleifend eget in velit. Nulla nisi tortor, dapibus sit amet dui vitae, eges
+    tas consequat velit. Fusce suscipit lacus at enim molestie, vel mattis ante fringilla
+</p>
+
+<hr/>
+Padre:
+<h1>{{titulo}}</h1>
+<ul>
+    <li>Gorra Negra</li>
+    <li>Camisa blanca</li>
+</ul>
+<hr/>
+Nombre del Parque:
+<input type="text" [(ngModel)]="nombreDelParque" (keyup)="mostrarNombre()"/>
+
+<p>
+    Resultado: {{nombreDelParque}}
+</p>
+
+<hr/>
+
+<div *ngIf="miParque">
+    <h4>Datos del parque desde el hijo</h4>
+    <ol>
+        <li>{{miParque.nombre}}</li>
+        <li>{{miParque.metros}}</li>
+        <li>{{miParque.vegetacion}}</li>
+        <li>{{miParque.abierto}}</li>
+    </ol>
+</div>
+
+<hr/>
+<parques [nombre]="'Nombre por defecto'"
+             [metros_cuadrados]='589'
+             (pasameLosDatos)="verDatosParque($event)"
+            ></parques>
+
+<p *ngIf="nombreDelParque">
+    Hijo:
+    <parques [nombre]="nombreDelParque" 
+             [metros_cuadrados]='567'
+             (pasameLosDatos)="verDatosParque($event)"
+            ></parques>
+</p>

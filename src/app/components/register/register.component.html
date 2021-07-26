@@ -1,0 +1,53 @@
+<div class="col-lg-6">
+    <h1> {{titulo}} </h1>
+
+    <div class="alert alert-success" *ngIf="status === 'success'">
+        El Registro Se Ha Realizado Correctamente, <a [routerLink]="['/login']">Identificate Aqui</a>
+
+    </div>
+
+    <div class="alert alert-danger" *ngIf="status === 'error'">
+        Error Al Registrarte, Verifica Tus Datos
+
+    </div>
+
+    <!-- Se crea el formulario, se le da un nombre #nombreForm="ngForm"
+         Se crear el metodo para guardar la informacion (ngSubmit)="onSubmit()"-->
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm);" class="col-lg-10">
+        <p>
+            <label for="name">Nombre</label>
+            <!-- Se le coloca un nombre al campo del formulrio #nombredelcampo="ngModel"
+                 Se le especifica que propiedad va a trabajar con el ngModel="user.name"-->
+            <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control" required/>
+            <span *ngIf="!name.valid && name.touched">
+                El Nombre Es Obligatorio
+            </span>
+        </p>
+
+        <p>
+            <label for="surname">Apellidos</label>
+            <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" required/>
+            <span *ngIf="!surname.valid && surname.touched">
+                Los Apellidos Son Obligatorios
+            </span>
+        </p>
+
+        <p>
+            <label for="email">Correo Electronico</label>
+            <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" required/>
+            <span *ngIf="!email.valid && email.touched">
+                El Correo Electronico Es Obligatorio
+            </span>
+        </p>
+
+        <p>
+            <label for="password">Contraseña</label>
+            <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" required/>
+            <span *ngIf="!password.valid && password.touched">
+                La Contraseña es Obligatoria
+            </span>
+        </p>
+
+        <input type="submit" value="{{ titulo }}" class="btn btn-primary" [disabled]="!registerForm.form.valid" />
+    </form>
+</div>

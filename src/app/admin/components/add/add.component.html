@@ -1,0 +1,42 @@
+<div class="col-lg-10">
+    <h2>{{ titulo }}</h2>
+
+    <form #addAnimalForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6">
+        <p>
+            <label for="name">Nombre</label>
+            <input type="text" name="name" #name="ngModel" [(ngModel)]="animal.name" class="form-control" required/>
+            <span *ngIf="!name.valid && name.touched">
+                El Nombre Es Obligatorio
+            </span>
+        </p>
+
+        <p>
+            <label for="description">Descripción</label>
+            <textarea name="description" #description="ngModel" [(ngModel)]="animal.description" class="form-control" required></textarea>
+            <span *ngIf="!description.valid && description.touched">
+                La Descripción Es Obligatoria
+            </span>
+        </p>
+
+        <p>
+            <label for="year">Año</label>
+            <input type="year" name="year" #year="ngModel" [(ngModel)]="animal.year" class="form-control" required/>
+            <span *ngIf="!year.valid && year.touched">
+                El Año Es Obligatorio
+            </span>
+        </p>
+
+        <div *ngIf="is_edit && animal.image">
+            <div class="image_for_edit">
+                <img src="{{ url + 'get-image-animal/' + animal.image }}"/>
+            </div>
+        </div>
+
+        <p>
+            <label for="image">Subir Imagen</label>
+            <input type="file" name="image" placeholder="Subir Imagen" (change)="fileChangeEvent($event)" />
+        </p>
+
+        <input type="submit" value="{{titulo}}" class="btn btn-success" [disabled]="!addAnimalForm.form.valid"/>
+    </form>
+</div>
